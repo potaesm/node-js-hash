@@ -15,6 +15,7 @@ const ASCII = require('./ASCII');
 const primeNumbers = require('./PrimeNumbers');
 
 function SHA256(plaintext = '') {
+    /** Pre-Processing */
     if (!plaintext) '';
     const plaintextBinaryArray = [];
     for (const char of plaintext) {
