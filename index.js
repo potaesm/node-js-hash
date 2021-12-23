@@ -75,4 +75,4 @@ function SHA256(plaintext = '') {
     return bin2hex(hashes.join(''));
 }
 
-console.log(SHA256('hello world'));
+console.log(SHA256('Suthinan Musitmani'));
