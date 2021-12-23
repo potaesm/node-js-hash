@@ -1,0 +1,25 @@
+{
+  "name": "node-js-hash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potaesm/node-js-hash.git"
+  },
+  "keywords": [
+    "node-js-hash"
+  ],
+  "author": "Suthinan Musitmani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/potaesm/node-js-hash/issues"
+  },
+  "homepage": "https://github.com/potaesm/node-js-hash#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
