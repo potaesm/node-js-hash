@@ -2,12 +2,10 @@ const {
     first32BitsFractionalPartsOfSqrt,
     first32BitsFractionalPartsOfCbrt,
     chunkString,
-    rotateLeft,
     rotateRight,
     shiftRight,
     dec2bin,
     dec2hex,
-    hex2bin,
     bin2hex,
     addPadding
 } = require('./Utils');
