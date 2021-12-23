@@ -226,23 +226,4 @@ const ASCII = {
     "ÿ": 255
 };
 
-function addPadding(paddingChar = '', paddingLength = 0, string = '', tail = false) {
-    while (string.length < paddingLength) {
-        if (tail) {
-            string = string + paddingChar;
-        } else {
-            string = paddingChar + string;
-        }
-    }
-    return string;
-}
-
-function dec2bin(dec, paddingLength = 8) {
-    return addPadding('0', paddingLength, (dec >>> 0).toString(2));
-}
-
-function dec2hex(dec, paddingLength = 8) {
-    return addPadding('0', paddingLength, Number(dec).toString(16));
-}
-
-module.exports = { ASCII, dec2bin, dec2hex, addPadding };
+module.exports = ASCII;
