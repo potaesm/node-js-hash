@@ -1,11 +1,14 @@
 const { ASCII, dec2bin, dec2hex, addPadding } = require('./ASCII');
 const primeNumbers = require('./PrimeNumbers');
 
+console.log('##############################################################################################################################################################');
+
 function SHA256(plaintext = '') {
     if (!plaintext) '';
     const plaintextBinaryArray = [];
     for (const char of plaintext) {
         plaintextBinaryArray.push(dec2bin(ASCII[char]));
+        // console.log(char, ASCII[char], dec2bin(ASCII[char]));
     }
     plaintextBinaryArray.push('1');
     let plaintextBinaryString = plaintextBinaryArray.join('');
@@ -28,12 +31,12 @@ function SHA256(plaintext = '') {
     for (let i = 0; i < 48; i++) {
         w.push(addPadding('0', 32, ''));
     }
-    for (let i = 16; i < 63; i++) {
-        const s0 = dec2bin(parseInt(rotateRight(w[i - 15], 7), 2) ^ parseInt(rotateRight(w[i - 15], 18), 2) ^ (parseInt(w[i - 15], 2) >> 3), 32);
-        const s1 = dec2bin(parseInt(rotateRight(w[i - 2], 17), 2) ^ parseInt(rotateRight(w[i - 2], 19), 2) ^ (parseInt(w[i - 2], 2) >> 10), 32);
+    for (let i = 16; i < 64; i++) {
+        const s0 = dec2bin(parseInt(rotateRight(w[i - 15], 7), 2) ^ parseInt(rotateRight(w[i - 15], 18), 2) ^ shiftRight(w[i - 15], 3), 32);
+        const s1 = dec2bin(parseInt(rotateRight(w[i - 2], 17), 2) ^ parseInt(rotateRight(w[i - 2], 19), 2) ^ shiftRight(w[i - 2], 10), 32);
         w[i] = dec2bin(parseInt(w[i - 16], 2) + parseInt(s0, 2) + parseInt(w[i - 7], 2) + parseInt(s1, 2), 32);
     }
-    console.log(w);
+    console.log(w, w.length);
 }
 
 /** Get first 32 bits of the fractional parts of the square roots */
@@ -47,17 +50,27 @@ function chunkString(string = '', chunkSize = 1) {
 }
 
 /** Rotate string left */
-function rotateLeft(string, noOfChars = 0) {
+function rotateLeft(string, amount = 0) {
     const chars = Array.from(string);
-    const n = noOfChars % chars.length;
+    const n = amount % chars.length;
     const newArray = chars.slice(n).concat(chars.slice(0, n));
     return newArray.join('');
 }
 
 /** Rotate string right */
-function rotateRight(string, noOfChars = 0) {
-    const n = noOfChars % string.length;
+function rotateRight(string, amount = 0) {
+    const n = amount % string.length;
     return rotateLeft(string, string.length - n);
+}
+
+/** Shift right */
+function shiftRight(binaryString = '', amount = 0) {
+    const integer = parseInt(binaryString, 2);
+    const normalShift = integer >> amount;
+    if (normalShift >= 0) {
+        return normalShift;
+    }
+    return parseInt(binaryString.substring(0, binaryString.length - amount), 2);
 }
 
 SHA256('hello world');
