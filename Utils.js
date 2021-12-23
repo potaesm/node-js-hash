@@ -51,8 +51,8 @@ function dec2hex(dec = 0, paddingLength = 8) {
 function hex2bin(hex = '', paddingLength = 8) {
     hex = hex.replace('0x', '').toLowerCase();
     let binaryString = '';
-    for (const c of hex) {
-        switch (c) {
+    for (let i = 0; i < hex.length; i++) {
+        switch (hex[i]) {
             case '0': binaryString += '0000'; break;
             case '1': binaryString += '0001'; break;
             case '2': binaryString += '0010'; break;
@@ -79,8 +79,8 @@ function hex2bin(hex = '', paddingLength = 8) {
 function bin2hex(bin = '', paddingLength = 8) {
     const chunks = chunkString(bin, 4);
     let hexString = '';
-    for (const bit of chunks) {
-        switch (bit) {
+    for (let i = 0; i < chunks.length; i++) {
+        switch (chunks[i]) {
             case '0000': hexString += '0'; break;
             case '0001': hexString += '1'; break;
             case '0010': hexString += '2'; break;
