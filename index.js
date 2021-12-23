@@ -24,8 +24,16 @@ function SHA256(plaintext = '') {
     /** Chunk Loop */
     const chunk512 = chunkString(plaintextBinaryString, 512);
     /** Create Message Schedule (w) */
-    const chunk32 = chunkString(plaintextBinaryString, 32);
-    console.log({ chunk512, chunk32 });
+    const w = chunkString(plaintextBinaryString, 32);
+    for (let i = 0; i < 48; i++) {
+        w.push(addPadding('0', 32, ''));
+    }
+    for (let i = 16; i < 63; i++) {
+        const s0 = dec2bin(parseInt(rotateRight(w[i - 15], 7), 2) ^ parseInt(rotateRight(w[i - 15], 18), 2) ^ (parseInt(w[i - 15], 2) >> 3), 32);
+        const s1 = dec2bin(parseInt(rotateRight(w[i - 2], 17), 2) ^ parseInt(rotateRight(w[i - 2], 19), 2) ^ (parseInt(w[i - 2], 2) >> 10), 32);
+        w[i] = dec2bin(parseInt(w[i - 16], 2) + parseInt(s0, 2) + parseInt(w[i - 7], 2) + parseInt(s1, 2), 32);
+    }
+    console.log(w);
 }
 
 /** Get first 32 bits of the fractional parts of the square roots */
@@ -36,6 +44,20 @@ function first32BitsFractionalPartsOfSqrt(number) {
 /** Chunk string to a smaller one */
 function chunkString(string = '', chunkSize = 1) {
     return string.match(new RegExp('.{1,' + chunkSize + '}', 'g'));
+}
+
+/** Rotate string left */
+function rotateLeft(string, noOfChars = 0) {
+    const chars = Array.from(string);
+    const n = noOfChars % chars.length;
+    const newArray = chars.slice(n).concat(chars.slice(0, n));
+    return newArray.join('');
+}
+
+/** Rotate string right */
+function rotateRight(string, noOfChars = 0) {
+    const n = noOfChars % string.length;
+    return rotateLeft(string, string.length - n);
 }
 
 SHA256('hello world');
