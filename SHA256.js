@@ -9,7 +9,7 @@ const {
     bin2hex,
     addPadding
 } = require('./Utils');
-const ASCII = require('./ASCII');
+const { ascii2dec } = require('./ASCII');
 const primeNumbers = require('./PrimeNumbers');
 
 function SHA256(plaintext = '') {
@@ -17,7 +17,7 @@ function SHA256(plaintext = '') {
     if (!plaintext) '';
     const plaintextBinaryArray = [];
     for (let i = 0; i < plaintext.length; i++) {
-        plaintextBinaryArray.push(dec2bin(ASCII[plaintext[i]]));
+        plaintextBinaryArray.push(dec2bin(ascii2dec[plaintext[i]]));
     }
     plaintextBinaryArray.push('1');
     let plaintextBinaryString = plaintextBinaryArray.join('');
