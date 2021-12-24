@@ -12,16 +12,18 @@ function HMAC_SHA256(message = '', key = '') {
         }
     }
     const I_KEY_PAD = [];
-    for (let i = 0; i < BLOCK_SIZE; i++) I_KEY_PAD[i] = key.charAt(i) ^ I_PAD;
+    for (let i = 0; i < BLOCK_SIZE; i++) I_KEY_PAD[i] = key.charCodeAt(i) ^ I_PAD;
     const hashSum1 = SHA256(I_KEY_PAD.map(i => String.fromCharCode(i)).join('') + message);
+    console.log(I_KEY_PAD.map(i => String.fromCharCode(i)).join(''), message, hashSum1);
     const O_KEY_PAD = [];
-    for (let i = 0; i < BLOCK_SIZE; i++) O_KEY_PAD[i] = key.charAt(i) ^ O_PAD;
+    for (let i = 0; i < BLOCK_SIZE; i++) O_KEY_PAD[i] = key.charCodeAt(i) ^ O_PAD;
     const hashSum2 = SHA256(O_KEY_PAD.map(o => String.fromCharCode(o)).join('') + hashSum1);
+    console.log(O_KEY_PAD.map(o => String.fromCharCode(o)).join(''), hashSum1, hashSum2);
     return hashSum2;
 }
 
-// console.log(HMAC_SHA256('Suthinan', 'thisIsASecretKey1234'));
+console.log(HMAC_SHA256('Suthinan', 'thisIsASecretKey1234'));
 
-console.log(SHA256('571fef28d92e3884b692a65f1ed79638bc041d87471fef87467cc948992aa335'));
+// console.log(SHA256('571fef28d92e3884b692a65f1ed79638bc041d87471fef87467cc948992aa335'));
 
 // console.log(SHA256('thisIsASe' + SHA256('cretKey1234' + 'my message here')));
