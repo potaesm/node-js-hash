@@ -1,4 +1,3 @@
-const { ascii2dec, dec2ascii } = require('./ASCII');
 const SHA256 = require('./SHA256');
 
 function HMAC_SHA256(data = '', key = '') {
@@ -33,7 +32,7 @@ function HMAC_SHA256(data = '', key = '') {
      * (4) apply H to the stream generated in step (3)
      */
     for (let i = 0; i < kx.length; i++) {
-        hashContext += dec2ascii[kx[i]];
+        hashContext += String.fromCharCode(kx[i]);
     }
     for (let i = 0; i < data.length; i++) {
         hashContext += data[i];
@@ -59,8 +58,8 @@ function HMAC_SHA256(data = '', key = '') {
     return SHA256(hashContext);
 }
 
-// console.log(HMAC_SHA256('Suthinan', 'thisIsASecretKey1234'));
+console.log(HMAC_SHA256('Suthinan', 'thisIsASecretKey1234'));
 
-console.log(SHA256('571fef28d92e3884b692a65f1ed79638bc041d87471fef87467cc948992aa335'));
+// console.log(SHA256('571fef28d92e3884b692a65f1ed79638bc041d87471fef87467cc948992aa335'));
 
 // console.log(SHA256('thisIsASe' + SHA256('cretKey1234' + 'my message here')));
