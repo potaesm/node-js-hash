@@ -59,4 +59,6 @@ function HMAC_SHA256(data = '', key = '') {
     return SHA256(hashContext);
 }
 
-console.log(HMAC_SHA256('Suthinan', 'Musitmani'));
+// console.log(HMAC_SHA256('Suthinan', 'Musitmani'));
+
+console.log(SHA256('Suthinan'));
