@@ -9,7 +9,6 @@ const {
     bin2hex,
     addPadding
 } = require('./Utils');
-const { ascii2dec } = require('./ASCII');
 const primeNumbers = require('./PrimeNumbers');
 
 function SHA256(plaintext = '') {
@@ -17,7 +16,7 @@ function SHA256(plaintext = '') {
     if (!plaintext) '';
     let plaintextBinaryString = '';
     for (let i = 0; i < plaintext.length; i++) {
-        plaintextBinaryString += dec2bin(ascii2dec[plaintext[i]]);
+        plaintextBinaryString += dec2bin(plaintext[i].charCodeAt(0));
     }
     let chunks = [plaintextBinaryString];
     if (plaintextBinaryString.length > 448) {

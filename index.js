@@ -25,7 +25,7 @@ function HMAC_SHA256(data = '', key = '') {
      *     (1) with ipad
      */
     const kx = [];
-    for (let i = 0; i < keyLength; i++) kx[i] = I_PAD ^ ascii2dec[key[i]];
+    for (let i = 0; i < keyLength; i++) kx[i] = I_PAD ^ key[i].charAt(0);
     for (let i = keyLength; i < B; i++) kx[i] = I_PAD ^ 0;
     /**
      * (3) append the stream of data 'text' to the B byte string resulting
@@ -36,7 +36,6 @@ function HMAC_SHA256(data = '', key = '') {
         hashContext += dec2ascii[kx[i]];
     }
     for (let i = 0; i < data.length; i++) {
-        console.log(data[i]);
         hashContext += data[i];
     }
     /**
@@ -45,7 +44,7 @@ function HMAC_SHA256(data = '', key = '') {
      *
      * NOTE: The "kx" variable is reused.
      */
-    for (let i = 0; i < keyLength; i++) kx[i] = O_PAD ^ ascii2dec[key[i]];
+    for (let i = 0; i < keyLength; i++) kx[i] = O_PAD ^ key[i].charAt(0);
     for (let i = keyLength; i < B; i++) kx[i] = O_PAD ^ 0;
     /**
      * (6) append the H result from step (4) to the B byte string
@@ -54,11 +53,14 @@ function HMAC_SHA256(data = '', key = '') {
      *     the result
      */
     for (let i = 0; i < kx.length; i++) {
-        hashContext += dec2ascii[kx[i]];
+        hashContext += String.fromCharCode(kx[i]);
     }
+    console.log(hashContext);
     return SHA256(hashContext);
 }
 
-// console.log(HMAC_SHA256('Suthinan', 'Musitmani'));
+// console.log(HMAC_SHA256('Suthinan', 'thisIsASecretKey1234'));
 
-console.log(SHA256('Suthinan'));
+console.log(SHA256('571fef28d92e3884b692a65f1ed79638bc041d87471fef87467cc948992aa335'));
+
+// console.log(SHA256('thisIsASe' + SHA256('cretKey1234' + 'my message here')));
