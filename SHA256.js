@@ -16,7 +16,7 @@ function SHA256(plaintext = '') {
     if (!plaintext) '';
     let plaintextBinaryString = '';
     for (let i = 0; i < plaintext.length; i++) {
-        plaintextBinaryString += dec2bin(plaintext[i].charCodeAt(0));
+        plaintextBinaryString += dec2bin(plaintext.charCodeAt(i));
     }
     let chunks = [plaintextBinaryString];
     if (plaintextBinaryString.length > 448) {
