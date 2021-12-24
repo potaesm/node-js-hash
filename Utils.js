@@ -38,17 +38,17 @@ function shiftRight(binaryString = '', amount = 0) {
 }
 
 /** Decimal To Binary */
-function dec2bin(dec, paddingLength = 8) {
-    return addPadding('0', paddingLength, (dec >>> 0).toString(2));
+function dec2bin(dec, paddingLength = 8, tail = false) {
+    return addPadding('0', paddingLength, (dec >>> 0).toString(2), tail);
 }
 
 /** Decimal To Hexadecimal */
-function dec2hex(dec = 0, paddingLength = 8) {
-    return addPadding('0', paddingLength, Number(dec).toString(16));
+function dec2hex(dec = 0, paddingLength = 8, tail = false) {
+    return addPadding('0', paddingLength, Number(dec).toString(16), tail);
 }
 
 /** Hexadecimal To Binary */
-function hex2bin(hex = '', paddingLength = 8) {
+function hex2bin(hex = '', paddingLength = 8, tail = false) {
     hex = hex.replace('0x', '').toLowerCase();
     let binaryString = '';
     for (let i = 0; i < hex.length; i++) {
@@ -72,11 +72,11 @@ function hex2bin(hex = '', paddingLength = 8) {
             default: return '';
         }
     }
-    return addPadding('0', paddingLength, binaryString);
+    return addPadding('0', paddingLength, binaryString, tail);
 }
 
 /** Binary To Hexadecimal */
-function bin2hex(bin = '', paddingLength = 8) {
+function bin2hex(bin = '', paddingLength = 8, tail = false) {
     const chunks = chunkString(bin, 4);
     let hexString = '';
     for (let i = 0; i < chunks.length; i++) {
@@ -100,7 +100,7 @@ function bin2hex(bin = '', paddingLength = 8) {
             default: return '';
         }
     }
-    return addPadding('0', paddingLength, hexString);
+    return addPadding('0', paddingLength, hexString, tail);
 }
 
 /** Add Padding Char To String */
