@@ -1,9 +1,11 @@
 /** REF: https://en.wikipedia.org/wiki/PBKDF2 */
 
+const { HMAC_SHA1 } = require('./HMAC');
+
 const { hex2string, XOR, dec2hex } = require('./Utils');
 
 function PBKDF2(PRF = HMAC_SHA1, password = '', salt = '', c = 4096, dkLen = 256) {
-    const hLen = 160;
+    const hLen = 160; // HMAC-SHA1 produces hex char * 4 bin = 160 bin
     if (dkLen > (Math.pow(2, 32) - 1) * hLen) {
         throw new Error('The desired bit-length of the derived key is too long');
     }
