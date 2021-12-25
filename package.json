@@ -21,5 +21,8 @@
   "homepage": "https://github.com/potaesm/node-js-hash#readme",
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "rusha": "^0.8.14"
   }
 }

@@ -115,6 +115,39 @@ function addPadding(paddingChar = '', paddingLength = 0, string = '', tail = fal
     return string;
 }
 
+/** Exclusive-OR */
+function XOR(input1, input2, radix = 2) {
+    const output = [];
+    for (let i = 0; i < input1.length; i++) {
+        output.push(parseInt(input1[i], radix) ^ parseInt(input2[i], radix));
+    }
+    return output.map(n => n.toString(2)).join('');
+}
+
+/** Binary To String */
+function bin2string(bin = []) {
+    return bin.map(_ => String.fromCharCode(parseInt(_, 2))).join('');
+}
+
+/** Hexadecimal To String */
+function hex2string(hex = '') {
+    let l, lcode, shiftedL, r, rcode, bin, char;
+    let result = '';
+    for (var i = 0; i < hex.length; i += 2) {
+        l = hex[i];
+        if (typeof l === 'number') lcode = parseInt(l);
+        else if (typeof l === 'string') lcode = parseInt(l, 16);
+        shiftedL = lcode << 4;
+        r = hex[i + 1];
+        if (typeof r === 'number') rcode = parseInt(r);
+        else if (typeof r === 'string') rcode = parseInt(r, 16);
+        bin = shiftedL | rcode;
+        char = String.fromCharCode(bin);
+        result += char;
+    }
+    return result;
+}
+
 module.exports = {
     first32BitsFractionalPartsOfSqrt,
     first32BitsFractionalPartsOfCbrt,
@@ -126,5 +159,8 @@ module.exports = {
     dec2hex,
     hex2bin,
     bin2hex,
-    addPadding
+    bin2string,
+    hex2string,
+    addPadding,
+    XOR
 };
