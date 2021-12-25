@@ -121,7 +121,7 @@ function XOR(input1, input2, radix = 2) {
     for (let i = 0; i < input1.length; i++) {
         output.push(parseInt(input1[i], radix) ^ parseInt(input2[i], radix));
     }
-    return output.map(n => n.toString(2)).join('');
+    return output.map(n => n.toString(radix)).join('');
 }
 
 /** Binary To String */
