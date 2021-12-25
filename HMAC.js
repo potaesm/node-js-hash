@@ -1,3 +1,5 @@
+/** REF: https://csrc.nist.gov/csrc/media/publications/fips/198/archive/2002-03-06/documents/fips-198a.pdf */
+
 const Rusha = require('rusha');
 const { dec2bin, hex2bin, bin2hex, hex2string, bin2string, XOR } = require('./Utils');
 
