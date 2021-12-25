@@ -47,19 +47,19 @@ function SHA256(plaintext = '') {
             w.push(addPadding('0', 32, ''));
         }
         for (let i = 16; i < 64; i++) {
-            const s0 = parseInt(rotateRight(w[i - 15], 7), 2) ^ parseInt(rotateRight(w[i - 15], 18), 2) ^ shiftRight(w[i - 15], 3);
-            const s1 = parseInt(rotateRight(w[i - 2], 17), 2) ^ parseInt(rotateRight(w[i - 2], 19), 2) ^ shiftRight(w[i - 2], 10);
+            const s0 = rotateRight(w[i - 15], 7) ^ rotateRight(w[i - 15], 18) ^ shiftRight(w[i - 15], 3);
+            const s1 = rotateRight(w[i - 2], 17) ^ rotateRight(w[i - 2], 19) ^ shiftRight(w[i - 2], 10);
             w[i] = dec2bin(parseInt(w[i - 16], 2) + s0 + parseInt(w[i - 7], 2) + s1, 32);
         }
         /** Compression */
         [a, b, c, d, e, f, g, h] = hashes.map(hash => parseInt(hash, 16));
         for (let i = 0; i < 64; i++) {
             const eBinary = dec2bin(e, 32);
-            const S1 = parseInt(rotateRight(eBinary, 6), 2) ^ parseInt(rotateRight(eBinary, 11), 2) ^ parseInt(rotateRight(eBinary, 25), 2);
+            const S1 = rotateRight(eBinary, 6) ^ rotateRight(eBinary, 11) ^ rotateRight(eBinary, 25);
             const ch = (e & f) ^ ((~e) & g);
             const temp1 = h + S1 + ch + k[i] + parseInt(w[i], 2);
             const aBinary = dec2bin(a, 32);
-            const S0 = parseInt(rotateRight(aBinary, 2), 2) ^ parseInt(rotateRight(aBinary, 13), 2) ^ parseInt(rotateRight(aBinary, 22), 2);
+            const S0 = rotateRight(aBinary, 2) ^ rotateRight(aBinary, 13) ^ rotateRight(aBinary, 22);
             const maj = (a & b) ^ (a & c) ^ (b & c);
             const temp2 = S0 + maj;
             h = g;

@@ -18,7 +18,7 @@ function rotateLeft(string, amount = 0) {
     const chars = Array.from(string);
     const n = amount % chars.length;
     const newArray = chars.slice(n).concat(chars.slice(0, n));
-    return newArray.join('');
+    return parseInt(newArray.join(''), 2);
 }
 
 /** Rotate string right */
