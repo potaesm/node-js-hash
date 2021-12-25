@@ -7,7 +7,7 @@ function H(message) {
     return Rusha.createHash().update(message).digest('hex');
 }
 
-function HMAC_SHA1(text = '', K = '') {
+function HMAC_SHA1(K = '', text = '') {
     let K0 = '';
     const B = 512;
     const ipad = '00110110';
